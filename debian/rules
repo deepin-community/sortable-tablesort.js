@@ -1,4 +1,21 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
 %:
 	dh $@
+
+override_dh_auto_build:
+	rollup -c --bundleConfigAsCjs
+	sass src/sortable.scss:sortable.css src/sortable-base.scss:sortable-base.css
+	sass src/sortable.scss:sortable.min.css src/sortable-base.scss:sortable-base.min.css --style compressed
+
+execute_before_dh_auto_clean:
+	rm -f sortable*
+	rm -rf .sass-cache
+
+override_dh_auto_test:
+	# The jest test provided requires several packages not
+	# currently in Debian.
