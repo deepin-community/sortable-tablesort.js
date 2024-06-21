@@ -1,0 +1,14 @@
+Description: Use rollup-plugin-terser rather than @rollup/plugin-terser
+ Debian does not have the library that upstream uses.
+Forwarded: not-needed
+Author: Julian Gilbey <jdg@debian.org>
+Last-Update: 2024-01-02
+
+--- a/rollup.config.js
++++ b/rollup.config.js
+@@ -1,4 +1,4 @@
+-import terser from '@rollup/plugin-terser'
++import { terser } from 'rollup-plugin-terser'
+ import typescript from '@rollup/plugin-typescript'
+ 
+ const terser_config = {
